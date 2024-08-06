@@ -1,0 +1,35 @@
+.about{
+    width:100%;
+    height:90vh;
+    display:flex;
+    flex-direction:column;
+}
+.aboutTop{
+    background-image: url("../assets/image4.jpg");
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width:100%;
+    height:45%;
+}
+.aboutBottom {
+    display: flex;
+    flex-direction: column;
+    height: 55%;
+    align-items: center;
+    margin-top: 50px;
+  }
+  
+  .aboutBottom p {
+    width: 1200px;
+  }
+  
+  .about .aboutBottom h1 {
+    font-weight: 400;
+    font-size: 70px;
+    color: black;
+    height: 30px;
+    display: flex;
+    justify-content: center;
+    transform: translateY(-40px);
+  }
