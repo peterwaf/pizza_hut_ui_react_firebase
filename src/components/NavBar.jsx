@@ -11,6 +11,8 @@ import { signOut } from "firebase/auth";
 import { auth } from "../firebase/config";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/config";
+import { AiFillDelete } from "react-icons/ai";
+
 
 function NavBar(props) {
   const [openLinks, setOpenLinks] = useState(false);
@@ -103,6 +105,9 @@ function NavBar(props) {
                   }
                   props.updateCartItem(cartItm.key, e.target.value);
                 }}></input>
+              </div>
+              <div>
+              <AiFillDelete onClick={() => { props.deleteItem(cartItm.key) }} />
               </div>
             </div>
 

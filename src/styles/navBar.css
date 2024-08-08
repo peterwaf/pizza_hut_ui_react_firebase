@@ -88,7 +88,8 @@
   width: 400px;
   right: 0px;
   top: 68px;
-  padding: 5px;
+  padding: 10px;
+
 }
 
 .cartItem {
@@ -104,6 +105,7 @@
 
 .cartItem div {
   width: 100px;
+  padding: 5px;
 }
 
 .hideCart {

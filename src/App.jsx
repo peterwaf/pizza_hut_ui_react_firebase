@@ -13,11 +13,18 @@ import { useState, useEffect } from "react"
 import './App.css'
 
 function App() {
-  const [cartList, setCartList] = useState([]);
+  const [cartList, setCartList] = useState(
+    (localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : []));
   const [howMany, setHowMany] = useState(0);
   const [totalAmnt, setTotalAmnt] = useState(0);
-  let allTotals = 0;
-  let allQtys = 0;
+  let  allTotals= 0
+  let allQtys = 0
+
+  //save cartList to localStorage
+
+  useEffect(() => {
+   localStorage.setItem("cartItems", JSON.stringify(cartList));
+  }, [cartList]);
 
   const updateCartItem = (id, newQty) => {
     setCartList(prevCartItems =>
@@ -42,16 +49,29 @@ function App() {
       setCartList(prevCartItems => [...prevCartItems, { ...cartItem, total: cartItemTotal }]);
     }
   };
+  
+  const deleteItem = (cartId) => {
+    setCartList(prevCartItems => prevCartItems.filter(item => item.key !== cartId));
+  }
 
 
   const loadAllTotals = () => {
     cartList.forEach(item => {
       allTotals += parseInt(item.total);
-      allQtys += parseInt(item.Qty)
+      allQtys += parseInt(item.Qty);
     });
     setHowMany(allQtys);
-    setTotalAmnt(allTotals);
+    setTotalAmnt(allTotals); 
   }
+
+useEffect(()=>{
+  if(cartList.length === 0){
+    setHowMany(0);
+    setTotalAmnt(0);
+  }
+
+},[howMany,totalAmnt,cartList])
+
 
   useEffect(() => {
     if (cartList && cartList.length > 0) {
@@ -59,6 +79,7 @@ function App() {
     }
   }, [cartList]);
 
+console.log(cartList);
 
   return (
     <div className="App">
@@ -67,7 +88,8 @@ function App() {
           updateCartItem={updateCartItem}
           loadAllTotals={loadAllTotals}
           howMany={howMany}
-          totalAmnt={totalAmnt} />
+          totalAmnt={totalAmnt}
+          deleteItem={deleteItem} />
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add-menu" element={<AddMenu />} />
