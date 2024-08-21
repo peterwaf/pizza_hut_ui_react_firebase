@@ -117,7 +117,7 @@ function NavBar(props) {
         }
         <div className="cartItms">All Items: {props.howMany}</div>
         <div className="totalAmnt">Total Amount :  {props.totalAmnt}</div>
-        <div><button id="checkOut" onClick={() => { checkOut("/checkout") }}>Check Out</button></div>
+        <div><button id="checkOut" onClick={() => { checkOut("/checkout");setShowHideCart(!showHideCart) }}>Check Out</button></div>
         <div><button id="checkOutClose" onClick={() => { setShowHideCart(!showHideCart) }}>Close</button></div>
 
       </div>
