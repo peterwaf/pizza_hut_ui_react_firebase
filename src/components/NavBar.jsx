@@ -12,6 +12,7 @@ import { auth } from "../firebase/config";
 import { getDoc, doc } from "firebase/firestore";
 import { db } from "../firebase/config";
 import { AiFillDelete } from "react-icons/ai";
+import { useNavigate } from "react-router-dom";
 
 
 function NavBar(props) {
@@ -21,6 +22,7 @@ function NavBar(props) {
   const [showHideCart, setShowHideCart] = useState(false);
   const [isGUser, setIsGUser] = useState(false);
   const [googUsrInf, setGoogUsrInf] = useState({});
+  const checkOut = useNavigate();
   const toggleMenu = () => {
     setOpenLinks(!openLinks)
   }
@@ -115,7 +117,7 @@ function NavBar(props) {
         }
         <div className="cartItms">All Items: {props.howMany}</div>
         <div className="totalAmnt">Total Amount :  {props.totalAmnt}</div>
-        <div><button id="checkOut">Check Out</button></div>
+        <div><button id="checkOut" onClick={() => { checkOut("/checkout") }}>Check Out</button></div>
         <div><button id="checkOutClose" onClick={() => { setShowHideCart(!showHideCart) }}>Close</button></div>
 
       </div>

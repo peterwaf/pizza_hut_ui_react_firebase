@@ -10,20 +10,22 @@ import Login from "./components/Login"
 import SignUp from "./components/SignUp"
 import AddMenu from "./components/AddMenu"
 import { useState, useEffect } from "react"
+import CheckOut from "./components/CheckOut"
 import './App.css'
+import Orders from "./components/Orders"
 
 function App() {
   const [cartList, setCartList] = useState(
     (localStorage.getItem("cartItems") ? JSON.parse(localStorage.getItem("cartItems")) : []));
   const [howMany, setHowMany] = useState(0);
   const [totalAmnt, setTotalAmnt] = useState(0);
-  let  allTotals= 0
+  let allTotals = 0
   let allQtys = 0
 
   //save cartList to localStorage
 
   useEffect(() => {
-   localStorage.setItem("cartItems", JSON.stringify(cartList));
+    localStorage.setItem("cartItems", JSON.stringify(cartList));
   }, [cartList]);
 
   const updateCartItem = (id, newQty) => {
@@ -49,7 +51,7 @@ function App() {
       setCartList(prevCartItems => [...prevCartItems, { ...cartItem, total: cartItemTotal }]);
     }
   };
-  
+
   const deleteItem = (cartId) => {
     setCartList(prevCartItems => prevCartItems.filter(item => item.key !== cartId));
   }
@@ -61,16 +63,16 @@ function App() {
       allQtys += parseInt(item.Qty);
     });
     setHowMany(allQtys);
-    setTotalAmnt(allTotals); 
+    setTotalAmnt(allTotals);
   }
 
-useEffect(()=>{
-  if(cartList.length === 0){
-    setHowMany(0);
-    setTotalAmnt(0);
-  }
+  useEffect(() => {
+    if (cartList.length === 0) {
+      setHowMany(0);
+      setTotalAmnt(0);
+    }
 
-},[howMany,totalAmnt,cartList])
+  }, [howMany, totalAmnt, cartList])
 
 
   useEffect(() => {
@@ -79,7 +81,9 @@ useEffect(()=>{
     }
   }, [cartList]);
 
-console.log(cartList);
+  const resetCart = () => {
+    setCartList([]);
+  }
 
   return (
     <div className="App">
@@ -93,11 +97,13 @@ console.log(cartList);
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/add-menu" element={<AddMenu />} />
+          <Route path="/orders" element={<Orders />} />
           <Route path="/about" element={<About />} />
-          <Route path="/menu" element={<Menu addToCart = {addToCart} />} />
+          <Route path="/menu" element={<Menu addToCart={addToCart} />} />
           <Route path="/contact" element={<Contact />} />
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
+          <Route path="/checkout" element={<CheckOut resetCart={resetCart} howMany={howMany} totalAmnt={totalAmnt} allTotals={allTotals} cartList={cartList} />} />
         </Routes>
         <Footer />
       </BrowserRouter >
