@@ -3,6 +3,7 @@ import { useState } from "react"
 import '../styles/checkout.css'
 import { db } from "../firebase/config";
 import { addDoc, collection } from "firebase/firestore";
+import { useNavigate } from "react-router-dom";
 function CheckOut(props) {
     const [checkOutFormData, setCheckOutFormData] = useState({
         orderedItems: props.cartList,
@@ -17,6 +18,7 @@ function CheckOut(props) {
     })
     const [checkOutErrorMessage, setCheckOutErrorMessage] = useState("");
     const validEmailFormat = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    const navigate = useNavigate();
 
     const handleCheckOutData = (event) => {
         const name = event.target.name;
@@ -46,7 +48,7 @@ function CheckOut(props) {
             try {
                 const docRef = await addDoc(collection(db, "Orders"), checkOutFormData);
                 console.log("Document written with ID: ", docRef.id);
-                alert("Order placed successfully, we will contact you shortly");
+                navigate('/success');
                 setCheckOutFormData({
                     orderedItems: props.cartList,
                     howMany: '',

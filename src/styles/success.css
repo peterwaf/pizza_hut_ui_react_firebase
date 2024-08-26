@@ -1,0 +1,17 @@
+#successDiv{
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        background-color: #f8f9fa;
+}
+
+#successDiv{padding-top:10px;}
+
+#successDiv img{
+    padding:10px;
+    width:400px;
+    height: auto;
+    border-radius: 5%;
+}

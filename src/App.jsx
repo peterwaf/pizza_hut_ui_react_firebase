@@ -13,6 +13,7 @@ import { useState, useEffect } from "react"
 import CheckOut from "./components/CheckOut"
 import './App.css'
 import Orders from "./components/Orders"
+import Success from "./components/Success"
 
 function App() {
   const [cartList, setCartList] = useState(
@@ -104,6 +105,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<SignUp />} />
           <Route path="/checkout" element={<CheckOut resetCart={resetCart} howMany={howMany} totalAmnt={totalAmnt} allTotals={allTotals} cartList={cartList} />} />
+          <Route path="/success" element = {<Success/>} />
         </Routes>
         <Footer />
       </BrowserRouter >
